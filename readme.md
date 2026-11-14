@@ -33,25 +33,35 @@ graphite neutral braucht). Die Zuordnung auf die HA-Rollen:
 
 | Rolle (Graphite)            | app.css                | HA-Variable(n)                                   |
 | --------------------------- | ---------------------- | ------------------------------------------------ |
-| Canvas (Seitenhintergrund)  | `slate-50` / `slate-950` | `primary-background-color`, `lovelace-background` |
-| Karte / Seitenleiste        | `bg-white` / `slate-900` | `card-background-color`, `sidebar-background-color`, `app-header-background-color` |
-| Füllung / Hover             | `slate-100` / `slate-800` | `secondary-background-color`, `ha-color-fill-neutral-*` |
+| Canvas (Seitenhintergrund)  | `--background`         | `primary-background-color`, `lovelace-background`, `app-header-background-color` |
+| Unterste Ebene              | `slate-950`            | `ha-color-surface-lower`, `ha-color-black`       |
+| Karten                      | `bg-white` / `slate-900` | `card-background-color`, `ha-color-surface-default` |
+| Seitenleiste                | `bg-white` / `slate-950` | `sidebar-background-color`                       |
+| Füllung / Hover             | `slate-100`/`slate-200` / `slate-800`/`slate-700` | `secondary-background-color`, `ha-color-fill-neutral-*` |
 | Eingabefeld                 | `slate-50` / `slate-800` | `input-fill-color`, `ha-color-form-background`   |
-| Rahmen                      | `slate-200` / `slate-800` | `divider-color`, `ha-card-border-color`, `ha-color-border-neutral-quiet` |
+| Rahmen                      | `slate-200` / `slate-800` | `divider-color`, `ha-color-border-neutral-quiet` |
 | Text                        | `slate-900` / `slate-100` | `primary-text-color`, `ha-color-text-primary`    |
 | Gedämpfter Text             | `slate-500`/`slate-400` / `slate-200` | `secondary-text-color`, `state-icon-color` |
 | Akzent                      | `--color-emerald-*` (Blau) | `primary-color`, `accent-color`, `ha-color-*-primary` |
 | Gefahr / Warnung / Info / Erfolg | `--color-red-*`, `--color-amber-*`, `--color-sky-400`, `--ring-ok` | `error-color`, `warning-color`, `info-color`, `success-color` |
 | Text auf Akzent             | `text-white` / `dark:text-slate-950` | `text-primary-color`, `ha-color-on-primary-loud` |
 
+Der Seitenhintergrund ist `--background` (`#f2f3f5` / `#1e1f22`) und **nicht**
+`bg-slate-50` / `dark:bg-slate-950` vom `<body>` in `layout.tsx`: die
+`body`-Regel in `app.css` steht außerhalb jeder `@layer`-Regel, und nicht-lasierte
+CSS Regeln gewinnen gegen Tailwinds Utility-Layer. `#191a1c` (`slate-950`) ist in
+`app.css` als Sidebar kommentiert und liegt deshalb unter dem Canvas.
+
 Drei Ebenen, weil HA heute drei Schichten hat (Stand Frontend `20261028.6`):
 
 1. `graphite-*` — die Rollen, Werte 1:1 aus `app.css`.
-2. `ha-color-*` — die HA-Paletten (05–95), aus den Rollen abgeleitet: 05–30
-   Richtung Textfarbe gemischt, 40/50 Originalwert, 60–95 Richtung Kartenfläche.
-   Die `color-mix()`-Stufen aus `app.css` liegen exakt auf 90/95 (hell) bzw.
-   80/90/95 (dunkel). Im dunklen Modus ist die Rampenrichtung umgekehrt, damit
-   HAs Semantik-Referenzen in beiden Modi gültig bleiben.
+2. `ha-color-*` — die HA-Paletten (05–95), aus den Rollen abgeleitet. Die neutrale
+   Rampe folgt HAs Richtung in beiden Modi (05 = tiefste Ebene, 95 = hellste), weil
+   ein paar Komponenten `ha-color-neutral-*` direkt verwenden (Toast, Date Picker,
+   Map-Lineal). Die bunten Rampen folgen `app.css`: 05–30 Richtung Textfarbe
+   gemischt, 40/50 Originalwert, 60–95 Richtung Kartenfläche — die
+   `color-mix()`-Stufen aus `app.css` liegen dort. Im dunklen Modus ist diese
+   Richtung umgekehrt, weil Tönungen dort auf dunkler Karte aufliegen.
 3. Semantik + Legacy (`color.globals.ts`) + Komponenten-Variablen — verweisen
    nur noch auf Ebene 1 und 2.
 
