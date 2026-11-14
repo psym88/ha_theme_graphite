@@ -13,12 +13,13 @@
 #       themes: !include_dir_merge_named themes
 #   Datei nach config/themes/ legen, HA neu starten, Theme im Profil wählen.
 #
-# „Graphite“ folgt dem Hell-/Dunkel-Modus von HA. „Graphite Hell“ und
-# „Graphite Dunkel“ erzwingen eine Variante (z. B. Wandtablet im Dunkeln).
+# „Graphite“ ist ein Theme für alle drei Modi: Hell/Dunkel/Auto stellt HA ein
+# (Profil → Erscheinungsbild bzw. das Menü der Seitenleiste), das Theme folgt
+# jeweils dem aktiven Modus.
 
 Graphite:
   modes:
-    light: &graphite-light
+    light:
 
       # ── Graphite-Rollen ─────────────────────────────────────────
       # Werte aus app_calibri src/app/app.css (Hell: :root, Dunkel: :root.dark),
@@ -524,7 +525,7 @@ Graphite:
       color-53:       "#efced9"
       color-54:       "#efcee5"
 
-    dark: &graphite-dark
+    dark:
 
       # ── Graphite-Rollen ─────────────────────────────────────────
       # Werte aus app_calibri src/app/app.css (Hell: :root, Dunkel: :root.dark),
@@ -1036,12 +1037,3 @@ Graphite:
       color-52:       "#633f44"
       color-53:       "#633f52"
       color-54:       "#633f60"
-
-# Einzelvarianten: dieselben Werte (YAML-Anker von oben), fester Modus.
-Graphite Hell:
-  modes:
-    light: *graphite-light
-
-Graphite Dunkel:
-  modes:
-    dark: *graphite-dark

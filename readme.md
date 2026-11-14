@@ -18,13 +18,11 @@ frontend:
 `themes/graphite.yaml` nach `config/themes/` kopieren, HA neu starten, dann unter
 **Profil → Erscheinungsbild → Theme** wählen.
 
-Drei Themes zur Wahl:
-
-| Theme            | Verhalten                                          |
-| ---------------- | -------------------------------------------------- |
-| `Graphite`       | folgt dem Hell-/Dunkel-Modus von HA (empfohlen)    |
-| `Graphite Hell`  | immer hell (z. B. Dashboard im Eingang)            |
-| `Graphite Dunkel`| immer dunkel (z. B. Wandtablet)                    |
+`Graphite` ist ein Theme für alle drei Modi: **Hell / Dunkel / Auto** stellt HA
+ein (die Knöpfe unter **Profil → Erscheinungsbild** bzw. im Menü der
+Seitenleiste), das Theme folgt dem aktiven Modus. Es enthält je einen Block für
+hell und dunkel — eigene Themes für ein erzwungenes Dashboard braucht es dafür
+nicht.
 
 ## Woher welche Farbe kommt
 
