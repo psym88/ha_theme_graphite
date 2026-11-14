@@ -138,8 +138,8 @@ Graphite:
       ha-color-text-secondary:               "var(--graphite-text-secondary)"
       ha-color-text-disabled:                "var(--graphite-text-disabled)"
       ha-color-text-link:                    "var(--graphite-accent)"
-      ha-color-text-primary-inverted:        "var(--graphite-canvas)"
-      ha-color-text-secondary-inverted:      "#696a6c"
+      ha-color-text-primary-inverted:        "#ffffff"                      # text-white auf dunkler Fläche
+      ha-color-text-secondary-inverted:      "#b3b7bd"                      # slate-300 (text-white/70)
       ha-color-border-primary-quiet:         "var(--ha-color-primary-90)"
       ha-color-border-primary-normal:        "var(--graphite-accent)"
       ha-color-border-primary-loud:          "var(--graphite-accent)"
@@ -228,9 +228,9 @@ Graphite:
       ha-color-surface-default:              "var(--graphite-card)"
       ha-color-surface-low:                  "var(--graphite-canvas)"
       ha-color-surface-lower:                "var(--graphite-canvas-alt)"
-      ha-color-surface-default-inverted:     "var(--graphite-canvas)"
-      ha-color-surface-low-inverted:         "var(--graphite-card)"
-      ha-color-surface-lower-inverted:       "var(--graphite-card)"
+      ha-color-surface-default-inverted:     "var(--ha-color-neutral-10)"   # umgekehrter Modus: graphite ist dunkel
+      ha-color-surface-low-inverted:         "var(--ha-color-neutral-05)"
+      ha-color-surface-lower-inverted:       "var(--ha-color-black)"
       ha-color-on-surface-default:           "var(--graphite-text)"
       ha-color-form-background:              "var(--graphite-field)"
       ha-color-form-background-hover:        "var(--graphite-field-disabled)"
@@ -281,7 +281,7 @@ Graphite:
       sidebar-icon-color:                     "var(--graphite-text-secondary)"
       sidebar-selected-text-color:            "var(--graphite-accent)"
       sidebar-selected-icon-color:            "var(--graphite-accent)"
-      app-header-background-color:            "var(--graphite-canvas)"
+      app-header-background-color:            "var(--graphite-sidebar)"   # Chrome wie Seitenleiste
       app-header-text-color:                  "var(--graphite-text)"
       app-header-border-bottom:               "1px solid #d3d6db"
       app-header-selection-bar-color:         "var(--graphite-accent)"
@@ -533,7 +533,7 @@ Graphite:
       graphite-canvas:             "#1e1f22"   # --background (body, ohne @layer: schlägt dark:bg-slate-950)
       graphite-canvas-alt:         "#191a1c"   # slate-950 (in app.css als Sidebar kommentiert)
       graphite-card:               "#2b2d30"   # slate-900 (Karten auf Canvas)
-      graphite-sidebar:            "#191a1c"   # Sidebar: slate-950 (app.css-Kommentar)
+      graphite-sidebar:            "#2b2d30"   # slate-900 (App-Navigation: dark:bg-slate-900)
       graphite-surface-2:          "#393b40"   # slate-800 (dark:hover:bg-slate-800)
       graphite-surface-3:          "#4e5057"   # slate-700 (dark:hover:bg-slate-700)
       graphite-field:              "#393b40"   # slate-800
@@ -644,8 +644,8 @@ Graphite:
       ha-color-text-secondary:               "var(--graphite-text-secondary)"
       ha-color-text-disabled:                "var(--graphite-text-disabled)"
       ha-color-text-link:                    "var(--graphite-accent)"
-      ha-color-text-primary-inverted:        "var(--graphite-canvas)"
-      ha-color-text-secondary-inverted:      "#888a8e"
+      ha-color-text-primary-inverted:        "var(--graphite-canvas-alt)"   # dark:text-slate-950 auf heller Fläche
+      ha-color-text-secondary-inverted:      "#62666e"                      # slate-500 (hell) auf heller Fläche
       ha-color-border-primary-quiet:         "var(--ha-color-primary-90)"
       ha-color-border-primary-normal:        "var(--graphite-accent)"
       ha-color-border-primary-loud:          "var(--graphite-accent)"
@@ -718,25 +718,25 @@ Graphite:
       ha-color-on-primary-loud:              "var(--graphite-on-accent)"
       ha-color-on-neutral-quiet:             "var(--graphite-text-secondary)"
       ha-color-on-neutral-normal:            "var(--graphite-text-secondary)"
-      ha-color-on-neutral-loud:              "var(--graphite-canvas)"
+      ha-color-on-neutral-loud:              "var(--ha-color-white)"        # Toast: hell auf dunkler Fläche
       ha-color-on-disabled-quiet:            "var(--graphite-text-disabled)"
       ha-color-on-disabled-normal:           "var(--graphite-text-disabled)"
       ha-color-on-disabled-loud:             "var(--graphite-text-disabled)"
       ha-color-on-danger-quiet:              "var(--graphite-danger)"
       ha-color-on-danger-normal:             "var(--graphite-danger)"
-      ha-color-on-danger-loud:               "var(--graphite-canvas)"
+      ha-color-on-danger-loud:               "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
       ha-color-on-warning-quiet:             "var(--graphite-warning)"
       ha-color-on-warning-normal:            "var(--graphite-warning)"
-      ha-color-on-warning-loud:              "var(--graphite-canvas)"
+      ha-color-on-warning-loud:              "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
       ha-color-on-success-quiet:             "var(--graphite-success)"
       ha-color-on-success-normal:            "var(--graphite-success)"
-      ha-color-on-success-loud:              "var(--graphite-canvas)"
+      ha-color-on-success-loud:              "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
       ha-color-surface-default:              "var(--graphite-card)"
       ha-color-surface-low:                  "var(--graphite-canvas)"
       ha-color-surface-lower:                "var(--graphite-canvas-alt)"
-      ha-color-surface-default-inverted:     "var(--graphite-canvas)"
-      ha-color-surface-low-inverted:         "var(--graphite-card)"
-      ha-color-surface-lower-inverted:       "var(--graphite-card)"
+      ha-color-surface-default-inverted:     "var(--ha-color-white)"        # umgekehrter Modus: graphite ist hell
+      ha-color-surface-low-inverted:         "var(--ha-color-neutral-90)"
+      ha-color-surface-lower-inverted:       "var(--ha-color-neutral-95)"
       ha-color-on-surface-default:           "var(--graphite-text)"
       ha-color-form-background:              "var(--graphite-field)"
       ha-color-form-background-hover:        "var(--graphite-field-disabled)"
@@ -787,7 +787,7 @@ Graphite:
       sidebar-icon-color:                     "var(--graphite-text-secondary)"
       sidebar-selected-text-color:            "var(--graphite-accent)"
       sidebar-selected-icon-color:            "var(--graphite-accent)"
-      app-header-background-color:            "var(--graphite-canvas)"
+      app-header-background-color:            "var(--graphite-sidebar)"   # Chrome wie Seitenleiste
       app-header-text-color:                  "var(--graphite-text)"
       app-header-border-bottom:               "1px solid #393b40"
       app-header-selection-bar-color:         "var(--graphite-accent)"

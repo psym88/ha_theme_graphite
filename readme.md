@@ -33,10 +33,10 @@ graphite neutral braucht). Die Zuordnung auf die HA-Rollen:
 
 | Rolle (Graphite)            | app.css                | HA-Variable(n)                                   |
 | --------------------------- | ---------------------- | ------------------------------------------------ |
-| Canvas (Seitenhintergrund)  | `--background`         | `primary-background-color`, `lovelace-background`, `app-header-background-color` |
+| Canvas (Seitenhintergrund)  | `--background`         | `primary-background-color`, `lovelace-background` |
 | Unterste Ebene              | `slate-950`            | `ha-color-surface-lower`, `ha-color-black`       |
 | Karten                      | `bg-white` / `slate-900` | `card-background-color`, `ha-color-surface-default` |
-| Seitenleiste                | `bg-white` / `slate-950` | `sidebar-background-color`                       |
+| Seitenleiste + Kopfzeile    | `bg-white` / `dark:bg-slate-900` (Navigationsleiste der App) | `sidebar-background-color`, `app-header-background-color` |
 | Füllung / Hover             | `slate-100`/`slate-200` / `slate-800`/`slate-700` | `secondary-background-color`, `ha-color-fill-neutral-*` |
 | Eingabefeld                 | `slate-50` / `slate-800` | `input-fill-color`, `ha-color-form-background`   |
 | Rahmen                      | `slate-200` / `slate-800` | `divider-color`, `ha-color-border-neutral-quiet` |
@@ -79,6 +79,14 @@ einige Graphite-Werte überstimmen.
   Dialogradius sind im Theme absichtlich nicht gesetzt — `app.css` themt nur
   Farben. Der 1-px-Kartenrand, den HA standardmäßig hat, zieht dabei über
   `divider-color` automatisch die Graphite-Rahmenfarbe.
+- **Invertierte Flächen = der andere Modus.** `ha-color-*-inverted` und die
+  `on-*-loud`-Textfarben gibt HA in beiden Modi fast gleich vor (Toast:
+  `neutral-10` mit `white-color` als Text). Graphite macht es wie die App:
+  `NetworkWatch`-Toast ist `bg-slate-900 text-white` bzw.
+  `dark:bg-white/90 dark:text-slate-900`, volle Farbflächen tragen im Dunklen
+  `dark:text-slate-950` statt Weiß. deshalb ist im dunklen Block
+  `on-neutral-loud` = `ha-color-white` (`#c1c3c8`) und
+  `on-danger/warning/success-loud` = `graphite-on-accent` (`#191a1c`).
 - **Fünf Bunttöne, 54 Serienfarben.** Graphite kennt nur Akzent, Gefahr,
   Warnung, Info, Erfolg. HA braucht für Graphen/Kalender 54 (`--color-1..54`)
   und Community-Karten 14 (`--graph-color-1..14`). Das 14-Ton-Rad darunter ist
