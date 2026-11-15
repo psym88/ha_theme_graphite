@@ -4,16 +4,6 @@ A neutral theme for [Home Assistant](https://www.home-assistant.io): light greys
 near-white canvas, raised cards on a near-black one, blue as the only accent. Light and dark
 in one file, so the theme follows whichever mode you or your device has set.
 
-<!-- Screenshots: drop graphite-light.png and graphite-dark.png into images/, see images/README.md -->
-
-**Light**
-
-![Graphite in light mode](images/graphite-light.png)
-
-**Dark**
-
-![Graphite in dark mode](images/graphite-dark.png)
-
 <!-- ha-marketplace:exclude-start -->
 
 ## Install
