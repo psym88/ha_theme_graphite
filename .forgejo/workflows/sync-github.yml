@@ -1,45 +1,47 @@
 name: Sync to GitHub
+run-name: Sync to GitHub ${{ inputs.tag || github.event.release.tag_name || 'only refs' }}
 
-# Pushes the branch and every tag to GitHub when a release is published here.
-# Deliberately not a --mirror push: a GitHub release hangs off its tag, and a
-# mirror push that deletes a tag takes the download the Marketplace points at
-# with it.
+# Forgejo is where this theme is written. A published release pushes the branch,
+# every tag and the release itself to the public GitHub repository, which is what
+# the Home Assistant Marketplace reads. A manual run without a tag only syncs the
+# refs. Releases are never deleted on GitHub from here.
 on:
   release:
-    types: [published, edited]
+    types:
+      - published
+      - edited
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing Forgejo release tag to publish, empty to only sync refs
+        required: false
+        type: string
 
 concurrency:
   group: sync-github
   cancel-in-progress: false
 
-env:
-  TARGET_REPO: psym88/ha_theme_graphite
-  BRANCH: main
-
 jobs:
   sync:
-    name: Push branch and tags
+    name: Sync code and release
     runs-on: docker
-    timeout-minutes: 10
+    container:
+      image: ghcr.io/catthehacker/ubuntu:act-22.04
+    timeout-minutes: 15
+    env:
+      GH_RELEASE_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+      FORGEJO_TOKEN: ${{ github.token }}
+      FORGEJO_API_URL: ${{ github.api_url }}
+      FORGEJO_REPOSITORY: ${{ github.repository }}
+      GITHUB_DISTRIBUTION_REPOSITORY: psym88/ha_theme_graphite
+      BRANCH: main
+      RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
     steps:
-      - name: Clone from Forgejo
-        run: |
-          set -eu
-          token="${FORGEJO_TOKEN:-$GITHUB_TOKEN}"
-          host=$(printf '%s' "$FORGEJO_SERVER_URL" | sed 's~^[a-z][a-z0-9+.-]*://~~')
-          git clone --quiet "https://x-access-token:${token}@${host}/${FORGEJO_REPOSITORY}.git" source
+      - name: Check out the repository
+        uses: https://data.forgejo.org/actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
-      - name: Push to GitHub
-        env:
-          SYNC_TOKEN: ${{ secrets.GITHUB_SYNC_TOKEN }}
-        run: |
-          set -eu
-          cd source
-          refs="refs/remotes/origin/${BRANCH}:refs/heads/${BRANCH}"
-          if test -n "$(git tag --list)"; then
-            refs="${refs} refs/tags/*:refs/tags/*"
-          fi
-          # Forgejo masks GITHUB_SYNC_TOKEN in the log; git itself never prints
-          # the password part of a remote URL.
-          git push --force "https://x-access-token:${SYNC_TOKEN}@github.com/${TARGET_REPO}.git" ${refs}
+      - name: Push refs and release to GitHub
+        run: bash scripts/sync-github.sh
