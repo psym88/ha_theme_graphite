@@ -42,7 +42,7 @@ set up: no resources, no extra integration.
 
 ### By hand
 
-1. Download `themes/graphite.yaml` from the [latest release](../../releases/latest).
+1. Get `themes/graphite.yaml` from this repository.
 2. Put it in the `themes` folder next to your `configuration.yaml`.
 3. Restart Home Assistant, or run `frontend.reload_themes`, and select the theme in your
    profile.
@@ -111,7 +111,7 @@ is what keeps switches, dialogs, chips and the new pickers from falling back to 
 blue.
 
 Home Assistant makes no promise about theme variables: one can be renamed or dropped in any
-release. If something looks wrong after an update, that is probably why — [open an
-issue](../../issues) with the version and a screenshot of the place.
+release, so a surface that looked fine can come back wrong after an update. Fixing it is a
+matter of pointing that variable at a Graphite role again.
 
 Released under the [MIT license](LICENSE).
