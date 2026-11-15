@@ -1,0 +1,45 @@
+name: Sync to GitHub
+
+# Pushes the branch and every tag to GitHub when a release is published here.
+# Deliberately not a --mirror push: a GitHub release hangs off its tag, and a
+# mirror push that deletes a tag takes the download the Marketplace points at
+# with it.
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+
+concurrency:
+  group: sync-github
+  cancel-in-progress: false
+
+env:
+  TARGET_REPO: psym88/ha_theme_graphite
+  BRANCH: main
+
+jobs:
+  sync:
+    name: Push branch and tags
+    runs-on: docker
+    timeout-minutes: 10
+    steps:
+      - name: Clone from Forgejo
+        run: |
+          set -eu
+          token="${FORGEJO_TOKEN:-$GITHUB_TOKEN}"
+          host=$(printf '%s' "$FORGEJO_SERVER_URL" | sed 's~^[a-z][a-z0-9+.-]*://~~')
+          git clone --quiet "https://x-access-token:${token}@${host}/${FORGEJO_REPOSITORY}.git" source
+
+      - name: Push to GitHub
+        env:
+          SYNC_TOKEN: ${{ secrets.GITHUB_SYNC_TOKEN }}
+        run: |
+          set -eu
+          cd source
+          refs="refs/remotes/origin/${BRANCH}:refs/heads/${BRANCH}"
+          if test -n "$(git tag --list)"; then
+            refs="${refs} refs/tags/*:refs/tags/*"
+          fi
+          # Forgejo masks GITHUB_SYNC_TOKEN in the log; git itself never prints
+          # the password part of a remote URL.
+          git push --force "https://x-access-token:${SYNC_TOKEN}@github.com/${TARGET_REPO}.git" ${refs}
