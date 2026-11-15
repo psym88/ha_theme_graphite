@@ -111,17 +111,7 @@ is what keeps switches, dialogs, chips and the new pickers from falling back to 
 blue.
 
 Home Assistant makes no promise about theme variables: one can be renamed or dropped in any
-release. If something looks wrong after an update, that is probably why — please open an
-issue, with the version and a screenshot of the place.
-
-## Contribute
-
-[CONTRIBUTING.md](CONTRIBUTING.md) explains where to change what, and what to check before a
-pull request. Colour questions and half-broken surfaces: [open an
-issue](../../issues).
+release. If something looks wrong after an update, that is probably why — [open an
+issue](../../issues) with the version and a screenshot of the place.
 
 Released under the [MIT license](LICENSE).
-
-The token layout follows the design tokens of the Home Assistant frontend itself. The file
-took its starting structure from [catppuccin/home-assistant](https://github.com/catppuccin/home-assistant)
-(MIT), one of the few public themes that set the complete `ha-color-*` set.
