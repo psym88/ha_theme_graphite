@@ -1,0 +1,43 @@
+name: A colour should be different
+description: A role in the theme that does not fit, or does not fit any more
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Graphite is five hues and a grey ramp on purpose, so this is not the place for a
+        second accent colour. A border that is too quiet, or text that fails to read on a
+        tint, is exactly what it is for.
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      multiple: true
+      options:
+        - light
+        - dark
+        - both
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Role or variable
+      description: The graphite-* role behind it if you can find it in themes/graphite.yaml
+      placeholder: graphite-border-strong, or ha-color-fill-neutral-quiet-hover
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: What it looks like now
+      description: Where you ran into it, and a screenshot if you have one
+    validations:
+      required: true
+  - type: textarea
+    id: better
+    attributes:
+      label: What would be better
+      description: A colour is welcome, the reason is more welcome
+    validations:
+      required: true
