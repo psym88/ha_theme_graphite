@@ -1,76 +1,72 @@
-# Graphite — Home-Assistant-Theme im Farbschema von app_calibri
+# Graphite - a Home Assistant theme
 #
-# Farbschema: app_calibri, Standard-Theme „Graphite“ (src/app/app.css, Stand
-#             97da5a6) – helle Graustufen auf fast weißem Grund bzw. abgesetzte
-#             Karten auf fast schwarzem Grund, Akzent Blau.
-# Struktur:   übernommen von catppuccin/home-assistant (2026-11-11), dem
-#             gepflegtesten Theme mit vollständigem ha-color-*-Satz; angepasst
-#             an Home Assistant Frontend 20261028.6.
+# Neutral greys on a near-white canvas, raised cards on a near-black one, blue
+# as the only accent. Tuned against the Home Assistant frontend 20261028.6: it
+# sets the classic variables and the ha-color-* design tokens, both modes.
 #
-# Einbau (https://www.home-assistant.io/integrations/frontend/#themes):
+# Install (https://www.home-assistant.io/integrations/frontend/#themes):
 #   configuration.yaml
 #     frontend:
 #       themes: !include_dir_merge_named themes
-#   Datei nach config/themes/ legen, HA neu starten, Theme im Profil wählen.
+#   Put the file in config/themes/, restart, pick Graphite in your profile.
 #
-# „Graphite“ ist ein Theme für alle drei Modi: Hell/Dunkel/Auto stellt HA ein
-# (Profil → Erscheinungsbild bzw. das Menü der Seitenleiste), das Theme folgt
-# jeweils dem aktiven Modus.
+# Graphite covers all three settings: light, dark or auto is chosen in HA
+# (profile, or the menu of the sidebar), the theme follows the active mode.
 
 Graphite:
   modes:
     light:
 
-      # ── Graphite-Rollen ─────────────────────────────────────────
-      # Werte aus app_calibri src/app/app.css (Hell: :root, Dunkel: :root.dark),
-      # Kommentar rechts nennt die Tailwind-Stufe bzw. Quelle der Rolle.
+      # ── Graphite roles ─────────────────────────────────────────
+      # Every role is a variable of its own, so a user can restyle one role
+      # in their own copy of this file instead of the layers below it.
 
-      graphite-canvas:             "#f2f3f5"   # --background (body, ohne @layer: schlägt bg-slate-50)
-      graphite-canvas-alt:         "#e9ebee"   # slate-950 (unterste Ebene)
-      graphite-card:               "#ffffff"   # --sheet-bg / bg-white
-      graphite-sidebar:            "#ffffff"   # Sidebar: bg-white
-      graphite-surface-2:          "#eceef1"   # slate-100 (hover:bg-slate-100)
-      graphite-surface-3:          "#d3d6db"   # slate-200 (hover:bg-slate-200)
-      graphite-field:              "#f7f8fa"   # slate-50
-      graphite-field-disabled:     "#eceef1"   # slate-100
-      graphite-border:             "#d3d6db"   # slate-200
-      graphite-border-strong:      "#b3b7bd"   # slate-300
-      graphite-text:               "#1f2123"   # slate-900
-      graphite-text-secondary:     "#62666e"   # slate-500
-      graphite-text-muted:         "#6f737b"   # slate-400
-      graphite-text-disabled:      "#91959c"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-icon-off:           "#b3b7bd"   # slate-300
-      graphite-on-accent:          "#ffffff"   # text-white
-      graphite-accent:             "#4e86ee"   # --color-emerald-500
-      graphite-accent-pressed:     "#3f6fc9"   # --color-emerald-700
-      graphite-accent-hover:       "#4272ca"   # --color-emerald-600
-      graphite-danger:             "#c75450"   # --color-red-500
-      graphite-danger-strong:      "#a94744"   # --color-red-600
-      graphite-warning:            "#b07e1e"   # --color-amber-500
-      graphite-warning-fill:       "#c07c2c"   # --ring-warn
-      graphite-info:               "#389fdc"   # --color-sky-400
-      graphite-success:            "#3f8f4f"   # --ring-ok
-      graphite-violet:             "#964eee"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-indigo:             "#514eee"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-rose:               "#c75078"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-pink:               "#c750a3"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-teal:               "#38dcd2"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-lime:               "#648f3f"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-accent-quiet:  "#f1f5fe"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-accent-normal: "#e3ecfc"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-danger:        "#fbf3f3"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-warning:       "#f7f2e8"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-success:       "#ecf4ed"   # ergänzt (app.css hat diese Stufe nicht)
+      graphite-canvas:             "#f2f3f5"           # page canvas
+      graphite-canvas-alt:         "#e9ebee"           # lowest layer, under the canvas
+      graphite-card:               "#ffffff"           # cards
+      graphite-sidebar:            "#ffffff"           # sidebar and header
+      graphite-surface-2:          "#eceef1"           # fills, hover
+      graphite-surface-3:          "#d3d6db"           # fills, active
+      graphite-field:              "#f7f8fa"           # input fields
+      graphite-field-disabled:     "#eceef1"           # input fields, disabled
+      graphite-border:             "#d3d6db"           # hairlines, quiet borders
+      graphite-border-strong:      "#b3b7bd"           # strong borders, scrollbars
+      graphite-text:               "#1f2123"           # primary text
+      graphite-text-secondary:     "#62666e"           # secondary text, icons
+      graphite-text-muted:         "#6f737b"           # muted text
+      graphite-text-disabled:      "#91959c"           # disabled text and icons
+      graphite-icon-off:           "#b3b7bd"           # icons of inactive entities
+      graphite-on-accent:          "#ffffff"           # text on a filled colour surface
+      graphite-accent:             "#4e86ee"           # the accent, also focus and links
+      graphite-accent-pressed:     "#3f6fc9"           # accent, pressed
+      graphite-accent-hover:       "#4272ca"           # accent, hover
+      graphite-danger:             "#c75450"           # danger
+      graphite-danger-strong:      "#a94744"           # danger, pressed
+      graphite-warning:            "#b07e1e"           # warning, as text
+      graphite-warning-fill:       "#c07c2c"           # warning, as a filled surface
+      graphite-info:               "#389fdc"           # info
+      graphite-success:            "#3f8f4f"           # success
+      graphite-violet:             "#964eee"           # charts and calendars only
+      graphite-indigo:             "#514eee"           # charts and calendars only
+      graphite-rose:               "#c75078"           # charts and calendars only
+      graphite-pink:               "#c750a3"           # charts and calendars only
+      graphite-teal:               "#38dcd2"           # charts and calendars only
+      graphite-lime:               "#648f3f"           # charts and calendars only
+      graphite-tint-accent-quiet:  "#f1f5fe"           # quiet accent tint
+      graphite-tint-accent-normal: "#e3ecfc"           # accent tint
+      graphite-tint-danger:        "#fbf3f3"           # quiet danger tint
+      graphite-tint-warning:       "#f7f2e8"           # quiet warning tint
+      graphite-tint-success:       "#ecf4ed"           # quiet success tint
 
-      # ── HA-Farbpaletten ha-color-* ──────────────────────────────
-      # Abgeleitet aus den Rollen. Die neutrale Rampe folgt HAs Richtung in
-      # beiden Modi (05 = tiefste Ebene, 95 = hellste), weil ein paar Komponenten
-      # ha-color-neutral-* direkt verwenden (Toast, Date Picker, Map-Lineal).
-      # Die bunten Rampen folgen app.css: 05-30 = Richtung Textfarbe gemischt,
-      # 40/50 = Originalwert, 60-95 = Richtung Kartenfläche (die color-mix-Stufen
-      # aus app.css sitzen dort). Im Dunkelen ist diese Richtung umgekehrt, weil
-      # Tönungen dort auf dunkler Karte liegen - HAs Semantik-Ebene ist deshalb
-      # vollständig ausgeschrieben und verweist auf Rollen, nicht auf Rampen.
+      # ── HA colour palettes (ha-color-*) ───────────────────────
+      # Derived from the roles. The neutral ramp keeps the direction HA uses in
+      # both modes (05 = lowest layer, 95 = brightest), because a few components
+      # use ha-color-neutral-* directly (toast, date picker, map scale). The
+      # coloured ramps run 05-30 towards the text colour, 40 and 50 hold the
+      # role value, 60-95 run towards the card surface. In dark mode that
+      # direction is reversed, because tints lie on a dark card there - which is
+      # why the semantic layer is written out in full and points at roles,
+      # not at ramps.
 
       ha-color-primary-05: "#263041"
       ha-color-primary-10: "#2d3f60"
@@ -130,17 +126,17 @@ Graphite:
       ha-color-white:      "#ffffff"
       ha-color-black:      "#1f2123"
 
-      # ── Semantische Ebene ───────────────────────────────────────
-      # Vollständig ausgeschrieben (HA 20261028.6) - sonst greift HAs eigener
-      # Dunkel-Block und überstimmt graphite-Werte.
+      # ── Semantic layer ───────────────────────────────────────────
+      # Written out in full, including the values HA already gets right: HA's own
+      # dark block would otherwise override some Graphite values.
 
       ha-color-focus:                        "var(--graphite-accent)"
       ha-color-text-primary:                 "var(--graphite-text)"
       ha-color-text-secondary:               "var(--graphite-text-secondary)"
       ha-color-text-disabled:                "var(--graphite-text-disabled)"
       ha-color-text-link:                    "var(--graphite-accent)"
-      ha-color-text-primary-inverted:        "#ffffff"                      # text-white auf dunkler Fläche
-      ha-color-text-secondary-inverted:      "#b3b7bd"                      # slate-300 (text-white/70)
+      ha-color-text-primary-inverted:        "#ffffff"                      # white text on a dark surface
+      ha-color-text-secondary-inverted:      "#b3b7bd"                      # text-white/70 of the light mode
       ha-color-border-primary-quiet:         "var(--ha-color-primary-90)"
       ha-color-border-primary-normal:        "var(--graphite-accent)"
       ha-color-border-primary-loud:          "var(--graphite-accent)"
@@ -229,7 +225,7 @@ Graphite:
       ha-color-surface-default:              "var(--graphite-card)"
       ha-color-surface-low:                  "var(--graphite-canvas)"
       ha-color-surface-lower:                "var(--graphite-canvas-alt)"
-      ha-color-surface-default-inverted:     "var(--ha-color-neutral-10)"   # umgekehrter Modus: graphite ist dunkel
+      ha-color-surface-default-inverted:     "var(--ha-color-neutral-10)"   # reversed mode: Graphite is dark here
       ha-color-surface-low-inverted:         "var(--ha-color-neutral-05)"
       ha-color-surface-lower-inverted:       "var(--ha-color-black)"
       ha-color-on-surface-default:           "var(--graphite-text)"
@@ -238,8 +234,8 @@ Graphite:
       ha-color-form-background-disabled:     "var(--graphite-field-disabled)"
       ha-color-shadow-scrollable-fade:       "rgba(0, 0, 0, 0.08)"
 
-      # ── Legacy-Ebene (color.globals.ts) ─────────────────────────
-      # Die alten Variablennamen, die HA und Karten weiter verwenden.
+      # ── Legacy layer (color.globals.ts) ──────────────────────────
+      # The old variable names that HA and community cards still ask for.
 
       primary-text-color:                     "var(--graphite-text)"
       secondary-text-color:                   "var(--graphite-text-secondary)"
@@ -282,7 +278,7 @@ Graphite:
       sidebar-icon-color:                     "var(--graphite-text-secondary)"
       sidebar-selected-text-color:            "var(--graphite-accent)"
       sidebar-selected-icon-color:            "var(--graphite-accent)"
-      app-header-background-color:            "var(--graphite-sidebar)"   # Chrome wie Seitenleiste
+      app-header-background-color:            "var(--graphite-sidebar)"   # header chrome matches the sidebar
       app-header-text-color:                  "var(--graphite-text)"
       app-header-border-bottom:               "1px solid #d3d6db"
       app-header-selection-bar-color:         "var(--graphite-accent)"
@@ -374,9 +370,9 @@ Graphite:
       ha-label-badge-color:                   "var(--graphite-accent)"
       ha-heading-badge-text-color:            "var(--graphite-text-secondary)"
 
-      # ── Komponenten-Variablen ───────────────────────────────────
-      # Definiert HA nicht global, wird aber überall abgefragt: Karten,
-      # Dialoge, Schalter, Slider, Tooltips, Codemirror, …
+      # ── Component variables ─────────────────────────────────────
+      # HA does not define these globally, but components ask for them: cards,
+      # dialogs, switches, sliders, tooltips, codemirror, ...
 
       ha-dialog-surface-background:             "var(--graphite-card)"
       ha-dialog-header-title-color:             "var(--graphite-text)"
@@ -451,10 +447,10 @@ Graphite:
       codemirror-qualifier:                     "var(--graphite-warning)"
       codemirror-type:                          "var(--graphite-warning)"
 
-      # ── Serienfarben ────────────────────────────────────────────
-      # color-1..54 (HA-Graphen, Kalender) und graph-color-1..14 (Community-
-      # Karten). graphite hat fünf Bunttöne; das 14-Ton-Rad darunter ist aus
-      # ihnen abgeleitet, pro Runde über vier Tonlagen.
+      # ── Series colours ──────────────────────────────────────────
+      # color-1..54 (HA graphs, calendar) and graph-color-1..14 (community
+      # cards). Graphite knows five hues; the 14-tone wheel under them is
+      # derived from those, over four pitches per turn.
 
       graph-color-1:  "#4e86ee"
       graph-color-2:  "#389fdc"
@@ -527,56 +523,56 @@ Graphite:
 
     dark:
 
-      # ── Graphite-Rollen ─────────────────────────────────────────
-      # Werte aus app_calibri src/app/app.css (Hell: :root, Dunkel: :root.dark),
-      # Kommentar rechts nennt die Tailwind-Stufe bzw. Quelle der Rolle.
+      # ── Graphite roles ─────────────────────────────────────────
+      # Every role is a variable of its own, so a user can restyle one role
+      # in their own copy of this file instead of the layers below it.
 
-      graphite-canvas:             "#1e1f22"   # --background (body, ohne @layer: schlägt dark:bg-slate-950)
-      graphite-canvas-alt:         "#191a1c"   # slate-950 (in app.css als Sidebar kommentiert)
-      graphite-card:               "#2b2d30"   # slate-900 (Karten auf Canvas)
-      graphite-sidebar:            "#2b2d30"   # slate-900 (App-Navigation: dark:bg-slate-900)
-      graphite-surface-2:          "#393b40"   # slate-800 (dark:hover:bg-slate-800)
-      graphite-surface-3:          "#4e5057"   # slate-700 (dark:hover:bg-slate-700)
-      graphite-field:              "#393b40"   # slate-800
-      graphite-field-disabled:     "#4e5057"   # slate-700
-      graphite-border:             "#393b40"   # slate-800
-      graphite-border-strong:      "#4e5057"   # slate-700
-      graphite-text:               "#c1c3c8"   # slate-100
-      graphite-text-secondary:     "#91949b"   # slate-200
-      graphite-text-muted:         "#91949b"   # slate-400
-      graphite-text-disabled:      "#7f838a"   # slate-600
-      graphite-icon-off:           "#7f838a"   # slate-600
-      graphite-on-accent:          "#191a1c"   # dark:text-slate-950
-      graphite-accent:             "#6796f5"   # --color-emerald-500
-      graphite-accent-pressed:     "#5e86d7"   # --color-emerald-600
-      graphite-accent-hover:       "#7ea6f6"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-danger:             "#f26d78"   # --color-red-500
-      graphite-danger-strong:      "#e0786a"   # --color-red-400
-      graphite-warning:            "#f2c550"   # --color-amber-500
-      graphite-warning-fill:       "#dd9a55"   # --ring-warn
-      graphite-info:               "#54b8f5"   # --color-sky-400
-      graphite-success:            "#57a05e"   # --ring-ok
-      graphite-violet:             "#aa67f5"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-indigo:             "#6c67f5"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-rose:               "#f26da9"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-pink:               "#f26dda"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-teal:               "#54f5ec"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-lime:               "#81a057"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-accent-quiet:  "#313844"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-accent-normal: "#323a48"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-danger:        "#3f3337"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-warning:       "#3f3c33"   # ergänzt (app.css hat diese Stufe nicht)
-      graphite-tint-success:       "#2f3835"   # ergänzt (app.css hat diese Stufe nicht)
+      graphite-canvas:             "#1e1f22"           # page canvas
+      graphite-canvas-alt:         "#191a1c"           # lowest layer, under the canvas
+      graphite-card:               "#2b2d30"           # cards
+      graphite-sidebar:            "#2b2d30"           # sidebar and header
+      graphite-surface-2:          "#393b40"           # fills, hover
+      graphite-surface-3:          "#4e5057"           # fills, active
+      graphite-field:              "#393b40"           # input fields
+      graphite-field-disabled:     "#4e5057"           # input fields, disabled
+      graphite-border:             "#393b40"           # hairlines, quiet borders
+      graphite-border-strong:      "#4e5057"           # strong borders, scrollbars
+      graphite-text:               "#c1c3c8"           # primary text
+      graphite-text-secondary:     "#91949b"           # secondary text, icons
+      graphite-text-muted:         "#91949b"           # muted text
+      graphite-text-disabled:      "#7f838a"           # disabled text and icons
+      graphite-icon-off:           "#7f838a"           # icons of inactive entities
+      graphite-on-accent:          "#191a1c"           # text on a filled colour surface
+      graphite-accent:             "#6796f5"           # the accent, also focus and links
+      graphite-accent-pressed:     "#5e86d7"           # accent, pressed
+      graphite-accent-hover:       "#7ea6f6"           # accent, hover
+      graphite-danger:             "#f26d78"           # danger
+      graphite-danger-strong:      "#e0786a"           # danger, pressed
+      graphite-warning:            "#f2c550"           # warning, as text
+      graphite-warning-fill:       "#dd9a55"           # warning, as a filled surface
+      graphite-info:               "#54b8f5"           # info
+      graphite-success:            "#57a05e"           # success
+      graphite-violet:             "#aa67f5"           # charts and calendars only
+      graphite-indigo:             "#6c67f5"           # charts and calendars only
+      graphite-rose:               "#f26da9"           # charts and calendars only
+      graphite-pink:               "#f26dda"           # charts and calendars only
+      graphite-teal:               "#54f5ec"           # charts and calendars only
+      graphite-lime:               "#81a057"           # charts and calendars only
+      graphite-tint-accent-quiet:  "#313844"           # quiet accent tint
+      graphite-tint-accent-normal: "#323a48"           # accent tint
+      graphite-tint-danger:        "#3f3337"           # quiet danger tint
+      graphite-tint-warning:       "#3f3c33"           # quiet warning tint
+      graphite-tint-success:       "#2f3835"           # quiet success tint
 
-      # ── HA-Farbpaletten ha-color-* ──────────────────────────────
-      # Abgeleitet aus den Rollen. Die neutrale Rampe folgt HAs Richtung in
-      # beiden Modi (05 = tiefste Ebene, 95 = hellste), weil ein paar Komponenten
-      # ha-color-neutral-* direkt verwenden (Toast, Date Picker, Map-Lineal).
-      # Die bunten Rampen folgen app.css: 05-30 = Richtung Textfarbe gemischt,
-      # 40/50 = Originalwert, 60-95 = Richtung Kartenfläche (die color-mix-Stufen
-      # aus app.css sitzen dort). Im Dunkelen ist diese Richtung umgekehrt, weil
-      # Tönungen dort auf dunkler Karte liegen - HAs Semantik-Ebene ist deshalb
-      # vollständig ausgeschrieben und verweist auf Rollen, nicht auf Rampen.
+      # ── HA colour palettes (ha-color-*) ───────────────────────
+      # Derived from the roles. The neutral ramp keeps the direction HA uses in
+      # both modes (05 = lowest layer, 95 = brightest), because a few components
+      # use ha-color-neutral-* directly (toast, date picker, map scale). The
+      # coloured ramps run 05-30 towards the text colour, 40 and 50 hold the
+      # role value, 60-95 run towards the card surface. In dark mode that
+      # direction is reversed, because tints lie on a dark card there - which is
+      # why the semantic layer is written out in full and points at roles,
+      # not at ramps.
 
       ha-color-primary-05: "#e8effe"
       ha-color-primary-10: "#d1e0fc"
@@ -636,17 +632,17 @@ Graphite:
       ha-color-white:      "#c1c3c8"
       ha-color-black:      "#191a1c"
 
-      # ── Semantische Ebene ───────────────────────────────────────
-      # Vollständig ausgeschrieben (HA 20261028.6) - sonst greift HAs eigener
-      # Dunkel-Block und überstimmt graphite-Werte.
+      # ── Semantic layer ───────────────────────────────────────────
+      # Written out in full, including the values HA already gets right: HA's own
+      # dark block would otherwise override some Graphite values.
 
       ha-color-focus:                        "var(--graphite-accent)"
       ha-color-text-primary:                 "var(--graphite-text)"
       ha-color-text-secondary:               "var(--graphite-text-secondary)"
       ha-color-text-disabled:                "var(--graphite-text-disabled)"
       ha-color-text-link:                    "var(--graphite-accent)"
-      ha-color-text-primary-inverted:        "var(--graphite-canvas-alt)"   # dark:text-slate-950 auf heller Fläche
-      ha-color-text-secondary-inverted:      "#62666e"                      # slate-500 (hell) auf heller Fläche
+      ha-color-text-primary-inverted:        "var(--graphite-canvas-alt)"   # dark text on a light surface
+      ha-color-text-secondary-inverted:      "#62666e"                      # the light mode grey, on a light surface
       ha-color-border-primary-quiet:         "var(--ha-color-primary-90)"
       ha-color-border-primary-normal:        "var(--graphite-accent)"
       ha-color-border-primary-loud:          "var(--graphite-accent)"
@@ -719,23 +715,23 @@ Graphite:
       ha-color-on-primary-loud:              "var(--graphite-on-accent)"
       ha-color-on-neutral-quiet:             "var(--graphite-text-secondary)"
       ha-color-on-neutral-normal:            "var(--graphite-text-secondary)"
-      ha-color-on-neutral-loud:              "var(--ha-color-white)"        # Toast: hell auf dunkler Fläche
+      ha-color-on-neutral-loud:              "var(--ha-color-white)"        # toast: light text on a dark surface
       ha-color-on-disabled-quiet:            "var(--graphite-text-disabled)"
       ha-color-on-disabled-normal:           "var(--graphite-text-disabled)"
       ha-color-on-disabled-loud:             "var(--graphite-text-disabled)"
       ha-color-on-danger-quiet:              "var(--graphite-danger)"
       ha-color-on-danger-normal:             "var(--graphite-danger)"
-      ha-color-on-danger-loud:               "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
+      ha-color-on-danger-loud:               "var(--graphite-on-accent)"    # dark text on a filled colour surface
       ha-color-on-warning-quiet:             "var(--graphite-warning)"
       ha-color-on-warning-normal:            "var(--graphite-warning)"
-      ha-color-on-warning-loud:              "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
+      ha-color-on-warning-loud:              "var(--graphite-on-accent)"    # dark text on a filled colour surface
       ha-color-on-success-quiet:             "var(--graphite-success)"
       ha-color-on-success-normal:            "var(--graphite-success)"
-      ha-color-on-success-loud:              "var(--graphite-on-accent)"    # dark:text-slate-950 auf voller Farbe
+      ha-color-on-success-loud:              "var(--graphite-on-accent)"    # dark text on a filled colour surface
       ha-color-surface-default:              "var(--graphite-card)"
       ha-color-surface-low:                  "var(--graphite-canvas)"
       ha-color-surface-lower:                "var(--graphite-canvas-alt)"
-      ha-color-surface-default-inverted:     "var(--ha-color-white)"        # umgekehrter Modus: graphite ist hell
+      ha-color-surface-default-inverted:     "var(--ha-color-white)"        # reversed mode: Graphite is light here
       ha-color-surface-low-inverted:         "var(--ha-color-neutral-90)"
       ha-color-surface-lower-inverted:       "var(--ha-color-neutral-95)"
       ha-color-on-surface-default:           "var(--graphite-text)"
@@ -744,8 +740,8 @@ Graphite:
       ha-color-form-background-disabled:     "var(--graphite-field-disabled)"
       ha-color-shadow-scrollable-fade:       "rgba(0, 0, 0, 0.4)"
 
-      # ── Legacy-Ebene (color.globals.ts) ─────────────────────────
-      # Die alten Variablennamen, die HA und Karten weiter verwenden.
+      # ── Legacy layer (color.globals.ts) ──────────────────────────
+      # The old variable names that HA and community cards still ask for.
 
       primary-text-color:                     "var(--graphite-text)"
       secondary-text-color:                   "var(--graphite-text-secondary)"
@@ -788,7 +784,7 @@ Graphite:
       sidebar-icon-color:                     "var(--graphite-text-secondary)"
       sidebar-selected-text-color:            "var(--graphite-accent)"
       sidebar-selected-icon-color:            "var(--graphite-accent)"
-      app-header-background-color:            "var(--graphite-sidebar)"   # Chrome wie Seitenleiste
+      app-header-background-color:            "var(--graphite-sidebar)"   # header chrome matches the sidebar
       app-header-text-color:                  "var(--graphite-text)"
       app-header-border-bottom:               "1px solid #393b40"
       app-header-selection-bar-color:         "var(--graphite-accent)"
@@ -880,9 +876,9 @@ Graphite:
       ha-label-badge-color:                   "var(--graphite-accent)"
       ha-heading-badge-text-color:            "var(--graphite-text-secondary)"
 
-      # ── Komponenten-Variablen ───────────────────────────────────
-      # Definiert HA nicht global, wird aber überall abgefragt: Karten,
-      # Dialoge, Schalter, Slider, Tooltips, Codemirror, …
+      # ── Component variables ─────────────────────────────────────
+      # HA does not define these globally, but components ask for them: cards,
+      # dialogs, switches, sliders, tooltips, codemirror, ...
 
       ha-dialog-surface-background:             "var(--graphite-card)"
       ha-dialog-header-title-color:             "var(--graphite-text)"
@@ -964,10 +960,10 @@ Graphite:
       mdc-ripple-color:                         "#c1c3c8"
       mdc-linear-progress-buffer-color:         "var(--graphite-border)"
 
-      # ── Serienfarben ────────────────────────────────────────────
-      # color-1..54 (HA-Graphen, Kalender) und graph-color-1..14 (Community-
-      # Karten). graphite hat fünf Bunttöne; das 14-Ton-Rad darunter ist aus
-      # ihnen abgeleitet, pro Runde über vier Tonlagen.
+      # ── Series colours ──────────────────────────────────────────
+      # color-1..54 (HA graphs, calendar) and graph-color-1..14 (community
+      # cards). Graphite knows five hues; the 14-tone wheel under them is
+      # derived from those, over four pitches per turn.
 
       graph-color-1:  "#6796f5"
       graph-color-2:  "#54b8f5"
