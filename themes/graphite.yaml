@@ -248,7 +248,7 @@ Graphite:
       darker-primary-color:                   "var(--ha-color-primary-20)"
       light-primary-color:                    "var(--graphite-tint-accent-normal)"
       accent-color:                           "var(--graphite-accent)"
-      divider-color:                          "var(--graphite-border)"
+      divider-color:                          "rgba(31, 33, 35, 0.2)"   # translucent: a markdown rule keeps border-style inset, which paints a colour darker than it reads here
       outline-color:                          "var(--graphite-border)"
       outline-hover-color:                    "var(--graphite-border-strong)"
       shadow-color:                           "rgba(0, 0, 0, 0.14)"
@@ -755,7 +755,7 @@ Graphite:
       darker-primary-color:                   "var(--ha-color-primary-20)"
       light-primary-color:                    "var(--graphite-tint-accent-normal)"
       accent-color:                           "var(--graphite-accent)"
-      divider-color:                          "var(--graphite-border)"
+      divider-color:                          "rgba(255, 255, 255, 0.2)"   # translucent: a markdown rule keeps border-style inset, which paints a colour darker than it reads here
       outline-color:                          "var(--graphite-border)"
       outline-hover-color:                    "var(--graphite-border-strong)"
       shadow-color:                           "rgba(0, 0, 0, 0.5)"
