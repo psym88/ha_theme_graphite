@@ -2,10 +2,11 @@
 # Syncs this repository and one of its releases to the public GitHub repository.
 #
 # Forgejo is the source of truth. GitHub gets the branch and the tags that exist
-# here, plus the release as a GitHub release object, because the Home Assistant
-# Marketplace reads a release and a tag alone is not one. Nothing is ever
-# deleted on GitHub, and a tag that is published there never moves: the download
-# the Marketplace points at hangs off that tag.
+# here, plus the release as a GitHub release object with the file HACS installs
+# as its asset, because that asset is what a download count on GitHub counts.
+# Nothing is ever deleted on GitHub, a published tag never moves, and an asset a
+# release already carries stays where it is: uploading it again starts its count
+# at zero.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -20,6 +21,7 @@ branch=${BRANCH:-main}
 release_tag=${RELEASE_TAG:-}
 github_url="https://github.com/${GITHUB_DISTRIBUTION_REPOSITORY}.git"
 github_api="https://api.github.com/repos/${GITHUB_DISTRIBUTION_REPOSITORY}"
+github_uploads="https://uploads.github.com/repos/${GITHUB_DISTRIBUTION_REPOSITORY}/releases"
 
 # The token goes into a header and never into the remote url: git repeats the
 # url in its error messages and would repeat the password with it.
@@ -161,5 +163,71 @@ if test -n "${GITHUB_STEP_SUMMARY:-}"; then
     printf '%s\n\n' "**${release_tag}** is on [${GITHUB_DISTRIBUTION_REPOSITORY}](${html_url})."
     printf '%s\n' "$(printf '%s' "$created" | json body)"
   } >>"$GITHUB_STEP_SUMMARY"
+fi
+echo '::endgroup::'
+
+echo '::group::Release asset'
+# HACS installs the file hacs.json names, so that file is the asset of the
+# release: a card keeps it next to hacs.json, a theme under themes/. An asset the
+# release already carries is left alone, because the download count hangs off the
+# asset itself and a re-uploaded one counts from zero again.
+asset_name=$(printf '%s' "$(git show "refs/tags/${release_tag}:hacs.json" 2>/dev/null || true)" | json filename)
+if test -z "$asset_name"; then
+  echo "hacs.json at ${release_tag} names no filename, so there is no asset to upload."
+else
+  asset_path=""
+  for candidate in "${asset_name}" "themes/${asset_name}"; do
+    if git cat-file -e "refs/tags/${release_tag}:${candidate}" 2>/dev/null; then
+      asset_path="${candidate}"
+      break
+    fi
+  done
+  if test -z "$asset_path"; then
+    echo "hacs.json names ${asset_name}, but ${release_tag} carries it in neither place." >&2
+    exit 1
+  fi
+  release_id=$(printf '%s' "$created" | json id)
+  existing_asset=$(printf '%s' "$created" | node -e '
+    let input = "";
+    process.stdin.on("data", (chunk) => (input += chunk)).on("end", () => {
+      const release = JSON.parse(input);
+      const wanted = process.argv[1];
+      const asset = (release.assets || []).find((item) => item.name === wanted);
+      process.stdout.write(asset ? String(asset.id) : "");
+    });
+  ' "$asset_name")
+  if test -n "$existing_asset"; then
+    echo "Release ${release_tag} already carries ${asset_name} on GitHub, its download count stays as it is."
+  else
+    case "$asset_name" in
+      *.js) asset_type="application/javascript" ;;
+      *.yaml | *.yml) asset_type="application/yaml" ;;
+      *) asset_type="application/octet-stream" ;;
+    esac
+    asset_file=$(mktemp)
+    git show "refs/tags/${release_tag}:${asset_path}" >"$asset_file"
+    uploaded=$(curl -fsS -X POST \
+      -H "Authorization: Bearer ${GH_RELEASE_TOKEN}" -H "Accept: application/vnd.github+json" \
+      -H "Content-Type: ${asset_type}" \
+      --data-binary "@${asset_file}" \
+      "${github_uploads}/releases/${release_id}/assets?name=${asset_name}")
+    asset_url=$(printf '%s' "$uploaded" | json url)
+    asset_size=$(printf '%s' "$uploaded" | json size)
+    # Reading the asset back is what shows GitHub stored the file byte for byte.
+    curl -fsSL -H "Authorization: Bearer ${GH_RELEASE_TOKEN}" -H "Accept: application/octet-stream" \
+      "$asset_url" >"${asset_file}.read-back"
+    if test "$(sha256sum "$asset_file" | cut -d' ' -f1)" != \
+      "$(sha256sum "${asset_file}.read-back" | cut -d' ' -f1)"; then
+      echo "GitHub stored ${asset_name} with a checksum that does not match ${release_tag}" >&2
+      rm -f "$asset_file" "${asset_file}.read-back"
+      exit 1
+    fi
+    rm -f "$asset_file" "${asset_file}.read-back"
+    echo "Uploaded ${asset_name} (${asset_size} bytes) as the asset of ${release_tag}, the copy on GitHub matches."
+    if test -n "${GITHUB_STEP_SUMMARY:-}"; then
+      printf '%s\n' "${asset_name} (${asset_size} bytes) is the downloadable asset of this release." \
+        >>"$GITHUB_STEP_SUMMARY"
+    fi
+  fi
 fi
 echo '::endgroup::'

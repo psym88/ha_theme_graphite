@@ -1,0 +1,31 @@
+name: Check the theme
+
+# Nothing is built here, so this only asks whether the files a Home Assistant
+# install reads still agree with each other. It runs on Forgejo because GitHub
+# only ever receives what this repository publishes to it.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: check-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Theme and README
+    runs-on: docker
+    container:
+      image: ghcr.io/catthehacker/ubuntu:act-22.04
+    timeout-minutes: 10
+    env:
+      GITHUB_DISTRIBUTION_REPOSITORY: psym88/ha_theme_graphite
+    steps:
+      - name: Check out the repository
+        uses: https://data.forgejo.org/actions/checkout@v4
+
+      - name: Theme, hacs.json and the Marketplace link
+        run: node scripts/check-theme.mjs
