@@ -536,8 +536,8 @@ Graphite:
       graphite-surface-3:          "#4e5057"           # fills, active
       graphite-field:              "#393b40"           # input fields
       graphite-field-disabled:     "#4e5057"           # input fields, disabled
-      graphite-border:             "#4a4d53"           # hairlines, quiet borders
-      graphite-border-strong:      "#5c6067"           # strong borders, scrollbars
+      graphite-border:             "#393b40"           # hairlines, quiet borders
+      graphite-border-strong:      "#4e5057"           # strong borders, scrollbars
       graphite-border-loud:        "#767a81"           # the idle line of a field, a border that must not read as text
       graphite-text:               "#c1c3c8"           # primary text
       graphite-text-secondary:     "#91949b"           # secondary text, icons
@@ -788,7 +788,7 @@ Graphite:
       sidebar-selected-icon-color:            "var(--graphite-accent)"
       app-header-background-color:            "var(--graphite-sidebar)"   # header chrome matches the sidebar
       app-header-text-color:                  "var(--graphite-text)"
-      app-header-border-bottom:               "1px solid #4a4d53"
+      app-header-border-bottom:               "1px solid #393b40"
       app-header-selection-bar-color:         "var(--graphite-accent)"
       app-header-edit-background-color:       "var(--graphite-surface-2)"
       app-header-edit-text-color:             "var(--graphite-text)"
