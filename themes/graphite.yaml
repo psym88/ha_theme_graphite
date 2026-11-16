@@ -375,6 +375,7 @@ Graphite:
       # HA does not define these globally, but components ask for them: cards,
       # dialogs, switches, sliders, tooltips, codemirror, ...
 
+      ha-card-border-color:                     "var(--graphite-border)"   # ha-card falls back to divider-color, which is translucent for the sake of the markdown rule
       ha-dialog-surface-background:             "var(--graphite-card)"
       ha-dialog-header-title-color:             "var(--graphite-text)"
       ha-dialog-header-subtitle-color:          "var(--graphite-text-secondary)"
@@ -882,6 +883,7 @@ Graphite:
       # HA does not define these globally, but components ask for them: cards,
       # dialogs, switches, sliders, tooltips, codemirror, ...
 
+      ha-card-border-color:                     "var(--graphite-border)"   # ha-card falls back to divider-color, which is translucent for the sake of the markdown rule
       ha-dialog-surface-background:             "var(--graphite-card)"
       ha-dialog-header-title-color:             "var(--graphite-text)"
       ha-dialog-header-subtitle-color:          "var(--graphite-text-secondary)"
