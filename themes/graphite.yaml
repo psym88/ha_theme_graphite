@@ -31,6 +31,7 @@ Graphite:
       graphite-field-disabled:     "#eceef1"           # input fields, disabled
       graphite-border:             "#d3d6db"           # hairlines, quiet borders
       graphite-border-strong:      "#b3b7bd"           # strong borders, scrollbars
+      graphite-border-loud:        "#8f939a"           # the idle line of a field, a border that must not read as text
       graphite-text:               "#1f2123"           # primary text
       graphite-text-secondary:     "#62666e"           # secondary text, icons
       graphite-text-muted:         "#6f737b"           # muted text
@@ -142,7 +143,7 @@ Graphite:
       ha-color-border-primary-loud:          "var(--graphite-accent)"
       ha-color-border-neutral-quiet:         "var(--graphite-border)"
       ha-color-border-neutral-normal:        "var(--graphite-border-strong)"
-      ha-color-border-neutral-loud:          "var(--graphite-text-muted)"
+      ha-color-border-neutral-loud:          "var(--graphite-border-loud)"
       ha-color-border-danger-quiet:          "var(--ha-color-red-90)"
       ha-color-border-danger-normal:         "var(--graphite-danger-strong)"
       ha-color-border-danger-loud:           "var(--graphite-danger)"
@@ -300,7 +301,7 @@ Graphite:
       input-idle-line-color:                  "var(--graphite-border-strong)"
       input-hover-line-color:                 "var(--graphite-accent)"
       input-disabled-line-color:              "var(--graphite-border)"
-      input-outlined-idle-border-color:       "var(--graphite-border)"
+      input-outlined-idle-border-color:       "var(--graphite-border-strong)"
       input-outlined-hover-border-color:      "var(--graphite-accent)"
       input-outlined-disabled-border-color:   "var(--graphite-border)"
       input-fill-color:                       "var(--graphite-field)"
@@ -357,7 +358,7 @@ Graphite:
       markdown-svg-background-color:          "transparent"
       markdown-svg-color:                     "var(--graphite-text-secondary)"
       code-editor-background-color:           "var(--graphite-canvas-alt)"
-      code-editor-gutter-color:               "var(--graphite-text-disabled)"
+      code-editor-gutter-color:               "var(--graphite-surface-2)"   # a background: HA paints the gutter and the editor toolbar with it
       chip-background-color:                  "rgba(31, 33, 35, 0.14)"
       ha-chip-container-color:                "rgba(31, 33, 35, 0.1)"
       ha-chip-label-color:                    "var(--graphite-text)"
@@ -535,8 +536,9 @@ Graphite:
       graphite-surface-3:          "#4e5057"           # fills, active
       graphite-field:              "#393b40"           # input fields
       graphite-field-disabled:     "#4e5057"           # input fields, disabled
-      graphite-border:             "#393b40"           # hairlines, quiet borders
-      graphite-border-strong:      "#4e5057"           # strong borders, scrollbars
+      graphite-border:             "#4a4d53"           # hairlines, quiet borders
+      graphite-border-strong:      "#5c6067"           # strong borders, scrollbars
+      graphite-border-loud:        "#767a81"           # the idle line of a field, a border that must not read as text
       graphite-text:               "#c1c3c8"           # primary text
       graphite-text-secondary:     "#91949b"           # secondary text, icons
       graphite-text-muted:         "#91949b"           # muted text
@@ -648,7 +650,7 @@ Graphite:
       ha-color-border-primary-loud:          "var(--graphite-accent)"
       ha-color-border-neutral-quiet:         "var(--graphite-border)"
       ha-color-border-neutral-normal:        "var(--graphite-border-strong)"
-      ha-color-border-neutral-loud:          "var(--graphite-text-muted)"
+      ha-color-border-neutral-loud:          "var(--graphite-border-loud)"
       ha-color-border-danger-quiet:          "var(--ha-color-red-90)"
       ha-color-border-danger-normal:         "var(--graphite-danger-strong)"
       ha-color-border-danger-loud:           "var(--graphite-danger)"
@@ -786,7 +788,7 @@ Graphite:
       sidebar-selected-icon-color:            "var(--graphite-accent)"
       app-header-background-color:            "var(--graphite-sidebar)"   # header chrome matches the sidebar
       app-header-text-color:                  "var(--graphite-text)"
-      app-header-border-bottom:               "1px solid #393b40"
+      app-header-border-bottom:               "1px solid #4a4d53"
       app-header-selection-bar-color:         "var(--graphite-accent)"
       app-header-edit-background-color:       "var(--graphite-surface-2)"
       app-header-edit-text-color:             "var(--graphite-text)"
@@ -806,7 +808,7 @@ Graphite:
       input-idle-line-color:                  "var(--graphite-border-strong)"
       input-hover-line-color:                 "var(--graphite-accent)"
       input-disabled-line-color:              "var(--graphite-border)"
-      input-outlined-idle-border-color:       "var(--graphite-border)"
+      input-outlined-idle-border-color:       "var(--graphite-border-strong)"
       input-outlined-hover-border-color:      "var(--graphite-accent)"
       input-outlined-disabled-border-color:   "var(--graphite-border)"
       input-fill-color:                       "var(--graphite-field)"
@@ -863,7 +865,7 @@ Graphite:
       markdown-svg-background-color:          "transparent"
       markdown-svg-color:                     "var(--graphite-text-secondary)"
       code-editor-background-color:           "var(--graphite-canvas-alt)"
-      code-editor-gutter-color:               "var(--graphite-text-disabled)"
+      code-editor-gutter-color:               "var(--graphite-surface-2)"   # a background: HA paints the gutter and the editor toolbar with it
       chip-background-color:                  "rgba(193, 195, 200, 0.2)"
       ha-chip-container-color:                "rgba(193, 195, 200, 0.16)"
       ha-chip-label-color:                    "var(--graphite-text)"
